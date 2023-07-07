@@ -18,7 +18,7 @@ def get_hash(password, salt):
     return hashed_password
 
 def login(user_name,password):
-  sql = 'SELECT hashed_password,salt FROM user_sample WHERE name = %s'
+  sql = 'SELECT hashed_password,salt FROM quiz_admin WHERE name = %s'
   flg = False
   
   try:
@@ -42,3 +42,46 @@ def login(user_name,password):
     cursor.close()
     connection.close()
   return flg
+
+def insert_user(user_name,password):
+    sql = 'INSERT INTO quiz_admin VALUES(default, %s, %s, %s)'
+    
+    salt = get_salt()
+    hashed_password = get_hash(password,salt)
+    
+    try :
+        connection = get_connection()
+        cursor = connection.cursor()
+        
+        cursor.execute(sql, (user_name, hashed_password, salt))
+        count = cursor.rowcount #更新件数取得
+        connection.commit()
+    
+    except psycopg2.DatabaseError :
+        count = 0
+        
+    finally :
+        cursor.close()
+        connection.close()
+    
+    return count
+  
+def insert_quiz(quiz_name, answer):
+    sql = 'INSERT INTO quiz VALUES(default, %s, %s, default)'
+    
+    try :
+        connection = get_connection()
+        cursor = connection.cursor()
+        
+        cursor.execute(sql, (quiz_name, answer))
+        count = cursor.rowcount #更新件数取得
+        connection.commit()
+    
+    except psycopg2.DatabaseError :
+        count = 0
+    
+    finally :
+        cursor.close()
+        connection.close()
+    
+    return count
