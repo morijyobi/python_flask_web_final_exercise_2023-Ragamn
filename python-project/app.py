@@ -87,7 +87,7 @@ def register_quiz_form():
   else :
     return redirect(url_for('login_form'))
   
-@app.route('/register_quiz' , methods=['GET'])
+@app.route('/register_quiz' , methods=['POST'])
 def register_quiz():
   quiz_name = request.form.get('quiz_name')
   answer = request.form.get('answer')
@@ -99,6 +99,11 @@ def register_quiz():
   else:
     error = '登録に失敗しました'
     return render_template('register_quiz_form.html', error=error)
+
+@app.route('/list')
+def list():
+  quiz_list = db.quiz_list()
+  return render_template('quiz_list.html',quizzes=quiz_list)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -85,3 +85,18 @@ def insert_quiz(quiz_name, answer):
         connection.close()
     
     return count
+
+def quiz_list():
+  sql = 'SELECT * FROM quiz'
+  flg = False
+  
+  try:
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    list = cursor.fetchall()
+    
+  finally :
+    cursor.close()
+    connection.close()
+  return list
