@@ -10,6 +10,7 @@
     {% if msg != null %}
     <p style="color: blue">{{msg}}</p>
     {% endif %}
+    <a href="{{url_for('register_form')}}">新規作成</a>
     <a href="{{url_for('form')}}">クイズに答える</a>
     <a href="{{url_for('login_form')}}">管理者ログイン</a>
   </body>
