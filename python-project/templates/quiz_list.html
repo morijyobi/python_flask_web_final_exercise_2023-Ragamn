@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>一覧</h1>
+    <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>問題文</th>
+              <th>答え</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for quiz in quizzes %}
+          <tr>
+              <td>{{ quiz[0] }}</td>
+              <td>{{ quiz[1] }}</td>
+              <td>{{ quiz[2] }}</td>
+          </tr>
+          {% endfor %}
+  </body>
+</html>
