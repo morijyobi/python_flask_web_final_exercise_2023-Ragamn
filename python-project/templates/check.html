@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+    <title>Document</title>
+  </head>
+  <body id="check">
+    <h1 class="main">結果</h1>
+    <div class="center">
+    {% for i in criterion %}
+      <h1>問題{{i+1}}</h1>
+      <img
+      src="{{url_for('static', filename=name+session['answer'][i][0])}}"
+      /><br>
+            <label for="{{session['answer'][i][1]}}"
+                >[選択項目1]{{session['answer'][i][1]}},</label
+              >
+              <label for="{{session['answer'][i][2]}}"
+                >[選択項目2]{{session['answer'][i][2]}},</label
+              >
+              <label for="{{session['answer'][i][3]}}"
+                >[選択項目3]{{session['answer'][i][3]}},</label
+              >
+              <label for="{{session['answer'][i][4]}}"
+                >[選択項目4]{{session['answer'][i][4]}},</label
+              >
+              <p>{{session['result'][i]}}</p>
+              <p class="r_answer">答え</p>
+              <p>{{session['answer'][i][5]}}</p>
+      {% endfor %}
+      <h1 class="r_answer">正答率{{count}}/{{num}}</h1>
+      <a href="{{url_for('form')}}">クイズ選択に戻る</a>
+    </div>
+  </body>
+</html>

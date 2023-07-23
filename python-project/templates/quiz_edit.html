@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+    <title>Document</title>
+  </head>
+  <body id="edit">
+    <h1>クイズ編集画面</h1>
+    {% if error != null %}
+    <p style="color: red">{{error}}</p>
+    {% endif %} {% if msg != null %}
+    <p style="color: blue">{{msg}}</p>
+    {% endif %}
+    <div class="edit">
+    <form
+      action="{{url_for('update_quiz')}}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <input type="hidden" name="id" value="{{ quiz[0] }}" />
+      <h2>画像:</h2><input class="file" type="file" name="file" required /> <br />
+      <h2>選択項目1：</h2><input
+      class="selectans"
+        type="text"
+        name="answer1"
+        value="{{quiz[2]}}"
+        onchange="TextBoxOnChange1(this,event);"
+      /><br />
+      <h2>選択項目2：</h2><input
+      class="selectans"
+        type="text"
+        name="answer2"
+        value="{{quiz[3]}}"
+        onchange="TextBoxOnChange2(this,event);"
+      /><br />
+      <h2>選択項目3：</h2><input
+      class="selectans"
+        type="text"
+        name="answer3"
+        value="{{quiz[4]}}"
+        onchange="TextBoxOnChange3(this,event);"
+      /><br />
+      <h2>選択項目4：</h2><input
+      class="selectans"
+        type="text"
+        name="answer4"
+        value="{{quiz[5]}}"
+        onchange="TextBoxOnChange4(this,event);"
+      /><br />
+      <h2>答え:</h2>
+      <select name="answer">
+        <option id="output1">{{quiz[2]}}</option>
+        <script type="text/javascript">
+          function TextBoxOnChange1(sender, event) {
+            var elem = document.getElementById("output1");
+            elem.innerHTML = sender.value;
+          }
+        </script>
+        <option id="output2">{{quiz[3]}}</option>
+        <script type="text/javascript">
+          function TextBoxOnChange2(sender, event) {
+            var elem = document.getElementById("output2");
+            elem.innerHTML = sender.value;
+          }
+        </script>
+        <option id="output3">{{quiz[4]}}</option>
+        <script type="text/javascript">
+          function TextBoxOnChange3(sender, event) {
+            var elem = document.getElementById("output3");
+            elem.innerHTML = sender.value;
+          }
+        </script>
+        <option id="output4">{{quiz[5]}}</option>
+        <script type="text/javascript">
+          function TextBoxOnChange4(sender, event) {
+            var elem = document.getElementById("output4");
+            elem.innerHTML = sender.value;
+          }
+        </script>
+      </select><br>
+      <input class="r_edit" type="submit"value="編集">
+    </form>
+    <form action="{{url_for('delete_quiz')}}" method="post">
+      <input type="hidden" name="id" value="{{ quiz[0] }}" />
+      <input class="button" type="submit" value="削除" />
+    </form>
+    <input type="button" value="戻る" onClick="javascript:history.go(-1);" />
+  </div>
+  </body>
+</html>

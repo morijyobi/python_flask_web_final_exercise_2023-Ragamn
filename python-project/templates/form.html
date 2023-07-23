@@ -4,8 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
   </head>
-  <body>
-    <h1>クイズ</h1>
+  <body id="form">
+      <h1 class="main">問題数選択</h1>
+      <a href="{{url_for('index')}}">戻る</a>
+      <div class="buttons">
+        <form action="{{url_for('quiz_answer')}}" method="GET">
+          <input type="hidden" name="question_num" value="5" />
+          <input class="button1" type="submit" value="５問" />
+        </form>
+
+        <form action="{{url_for('quiz_answer')}}" method="GET">
+          <input type="hidden" name="question_num" value="10" />
+          <input class="button2" type="submit" value="１０問" />
+        </form>
+
+        <form action="{{url_for('quiz_answer')}}" method="GET">
+          <input type="hidden" name="question_num" value="15" />
+          <input class="button3" type="submit" value="１５問" />
+        </form>
+    </div>
+    <footer>
+    
+    </footer>
   </body>
 </html>
