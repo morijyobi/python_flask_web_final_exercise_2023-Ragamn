@@ -66,14 +66,14 @@ def insert_user(user_name,password):
     
     return count
   
-def insert_quiz(quiz_name, answer):
-    sql = 'INSERT INTO quiz VALUES(default, %s, %s, default)'
+def insert_quiz(picture,answer1,answer2,answer3,answer4,answer):
+    sql = 'INSERT INTO quiz VALUES(default,%s, %s,%s,%s,%s,%s,default)'
     
     try :
         connection = get_connection()
         cursor = connection.cursor()
         
-        cursor.execute(sql, (quiz_name, answer))
+        cursor.execute(sql, (picture, answer1,answer2,answer3,answer4,answer))
         count = cursor.rowcount #更新件数取得
         connection.commit()
     
@@ -87,8 +87,7 @@ def insert_quiz(quiz_name, answer):
     return count
 
 def quiz_list():
-  sql = 'SELECT * FROM quiz'
-  flg = False
+  sql = 'SELECT * FROM quiz WHERE delete_flg = FALSE ORDER BY id ASC'
   
   try:
     connection = get_connection()
@@ -100,3 +99,86 @@ def quiz_list():
     cursor.close()
     connection.close()
   return list
+
+def select_quiz(id):
+  sql = 'SELECT * FROM quiz WHERE id = %s'
+  
+  try:
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute(sql,(id,))
+    quiz = cursor.fetchone()
+      
+  finally :
+    cursor.close()
+    connection.close()
+    
+  return quiz
+
+def update_quiz(id,picture,answer1,answer2,answer3,answer4,answer):
+  sql = 'UPDATE quiz SET picture_path = %s,answer1 = %s,answer2 = %s,answer3 = %s,answer4 = %s,answer = %s WHERE id = %s'
+  
+  try:
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute(sql,(picture, answer1,answer2,answer3,answer4,answer,id))
+    count = cursor.rowcount #更新件数取得
+    connection.commit()
+    
+  except psycopg2.DatabaseError :
+    count = 0
+    
+  finally :
+    cursor.close()
+    connection.close()
+    
+  return count
+
+def delete_quiz(id):
+  sql = 'UPDATE quiz SET delete_flg = TRUE WHERE id = %s'
+  
+  try:
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute(sql,(id,))
+    count = cursor.rowcount #更新件数取得
+    connection.commit()
+    
+  except psycopg2.DatabaseError :
+    count = 0
+    
+  finally :
+    cursor.close()
+    connection.close()
+    
+  return count
+
+def count_id():
+  sql = 'SELECT count(id) FROM quiz'
+  
+  try:
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    count_num = cursor.fetchone()
+      
+  finally :
+    cursor.close()
+    connection.close()
+    
+  return count_num
+
+def select_quiz_answer(id):
+  sql = 'SELECT picture_path,answer1,answer2,answer3,answer4,answer FROM quiz WHERE id = %s AND delete_flg = FALSE'
+  
+  try:
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute(sql,(id,))
+    quiz = cursor.fetchone()
+      
+  finally :
+    cursor.close()
+    connection.close()
+    
+  return quiz
