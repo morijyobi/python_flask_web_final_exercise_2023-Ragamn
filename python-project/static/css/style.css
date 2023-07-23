@@ -1,0 +1,211 @@
+body{
+  margin: 0;
+  background-image: url(../images/trees.jpg);
+}
+h2{
+  font-size: 30px;
+  color: #FFFFFF;
+}
+/* #index,#form,#quiz_answer_form .main{
+  color: white;
+} */
+p {
+  color: white;
+  font-weight: 900;
+}
+#check .r_answer{
+  color: #FF0034;
+}
+/* #check,#index a{
+  color: white;
+  text-decoration:none;
+} */
+label{
+  color: white;
+  font-weight: 900;
+}
+h1{
+  color: white;
+}
+a {
+  color: #FFFFFF;
+  font-size: 40px;
+  text-decoration:none;
+}
+#list img {
+  width: 100px;
+  height: auto;
+  background-size:contain;
+}
+/* .q_picture{
+  width: 50px;
+} */
+#index,#form{
+  text-align: center;
+  margin: 0px;
+}
+#form,#quiz_answer_form .main{
+  position: absolute;
+  left: 0;
+}
+table {
+  border-collapse:  collapse;
+  border-color: #FFFFFF;
+  border-width: 2px;
+  margin: auto;
+  color: #FFFFFF;
+  font-weight: 900;
+}
+#index h1{
+  position: absolute;
+  left: 0;
+}
+#index .first{
+  position: fixed;
+  margin-top: 20%;
+  left: 20%;
+}
+#index .second{
+  position: absolute;
+  margin-top: 20%;
+  right: 20%;
+}
+#form{
+  position:absolute;
+  left: 0px;
+}
+#form input{
+  padding: 30px;
+}
+#form .buttons{
+  display: flex;
+}
+#form .button1{
+  margin-top: 100%;
+  margin-left: 110%;
+  background-color: #7BF0AD;
+  border: none;
+  border-radius:30px;
+  font-size: 40px;
+}
+#form .button2{
+  position: fixed;
+  margin-top: 11%;
+  margin-left: 32%;
+  background-color: #7BB8FF;
+  border: none;
+  border-radius:30px;
+  font-size: 40px;
+}
+#form .button3{
+  position: absolute;
+  margin-top: 89%;
+  margin-left: 510%;
+  background-color: #FF4168;
+  border: none;
+  border-radius:30px;
+  font-size: 40px;
+}
+#form a{
+  position: fixed;
+  top: 5%;
+  left: 95%;
+  font-size: 30px;
+}
+#form input:hover{
+  background-color: gray;
+}
+.question{
+  width: 600px;
+  margin: auto;
+  border-bottom: 3px dashed #FFFFFF;
+}
+#quiz_answer_form img{
+  width: 15%;
+  background-size:contain;
+}
+a:hover{
+    color: black;
+  }
+.menulink{
+  font-size: 30px;
+  position:fixed;
+  top: 5%;
+  margin-left: 80%;
+}
+#quiz_answer_form .maru{
+  margin-left: 80%;
+  font-size: 20px;
+  border-radius:30px;
+  background-color: orange;
+}
+#quiz_answer_form .maru:hover{
+  background-color: gray;
+}
+#check .main{
+  position: absolute;
+  margin-right: 0;
+}
+.center{
+  text-align: center;
+}
+#login .input{
+  width: 200px;
+  height: 30px;
+  font-size: 30px;
+}
+#login button{
+  width: 100px;
+  height: 30px;
+  font-size: 20px;
+  background-color: orange;
+}
+#login button:hover{
+  background-color: gray;
+}
+#admin .adminmenu{
+  text-align: center;
+}
+#register .registerform{
+  text-align: center;
+}
+.file{
+  width: 400px;
+  height: 30px;
+  font-size: 20px;
+  color: #FFFFFF;
+}
+#register,#edit .selectans{
+  width: 300px;
+  height: 30px;
+  font-size: 30px;
+}
+#register,#edit select{
+  width: 100px;
+  height: 30px;
+  font-size: 20px;
+}
+#register button{
+  background-color: orange;
+}
+#register button:hover{
+  background-color: gray;
+}
+#edit .edit{
+  text-align: center;
+}
+#edit .button{
+  background-color: orange;
+}
+#edit .r_edit{
+  background-color: orange;
+}
+#edit .button:hover{
+  background-color: gray;
+}
+#edit .r_edit:hover{
+  background-color: gray;
+}
+.back2{
+  font-size: 20px;
+}
