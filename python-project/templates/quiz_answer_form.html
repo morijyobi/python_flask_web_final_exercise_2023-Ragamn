@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+  </head>
+  <body id="quiz_answer_form">
+      <h1 class="main">解答</h1>
+      <a class="menulink" href="{{url_for('form')}}">クイズ選択に戻る</a>
+    <form action="{{url_for('answer_check')}}" method="POST">
+      <input type="hidden" name="num" value="{{num}}" />
+    {% for i in i %}
+    <div class="question">
+      <h1>問題{{i+1}}<br>このキャラクターの名前は？</h1>
+      <img
+      src="{{url_for('static', filename=name+session['answer'][i][0])}}"
+      /><br>
+            <input
+                type="radio"
+                name="u_answer{{loop.index0}}"
+                id="{{session['answer'][i][1]}}"
+                value="{{session['answer'][i][1]}}"
+                checked
+              /><label for="{{session['answer'][i][1]}}"
+                >{{session['answer'][i][1]}}</label
+              >
+              <input
+                type="radio"
+                name="u_answer{{loop.index0}}"
+                id="{{session['answer'][i][2]}}"
+                value="{{session['answer'][i][2]}}"
+              /><label for="{{session['answer'][i][2]}}"
+                >{{session['answer'][i][2]}}</label
+              >
+              <input
+                type="radio"
+                name="u_answer{{loop.index0}}"
+                id="{{session['answer'][i][3]}}"
+                value="{{session['answer'][i][3]}}"
+              /><label for="{{session['answer'][i][3]}}"
+                >{{session['answer'][i][3]}}</label
+              >
+              <input
+                type="radio"
+                name="u_answer{{loop.index0}}"
+                id="{{session['answer'][i][4]}}"
+                value="{{session['answer'][i][4]}}"
+              /><label for="{{session['answer'][i][4]}}"
+                >{{session['answer'][i][4]}}</label
+              >
+              <br>
+            </div>
+      {% endfor %}
+      <input class="maru" type="submit" value="答え合わせをする" />
+    </form>
+    
+  </body>
+</html>
