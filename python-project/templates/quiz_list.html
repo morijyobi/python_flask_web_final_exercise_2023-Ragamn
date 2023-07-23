@@ -1,26 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
     <title>Document</title>
   </head>
-  <body>
+  <body id="list">
     <h1>一覧</h1>
-    <table class="table table-striped">
+    <div class="center">
+    <a href="{{url_for('register_quiz_form')}}">クイズ登録</a>
+    <a href="{{url_for('logout')}}">ログアウト</a>
+  </div>
+    <table class="table table-striped" border="1">
       <thead>
           <tr>
               <th>ID</th>
-              <th>問題文</th>
+              <th class="q_picture">写真</th>
+              <th>選択項目1</th>
+              <th>選択項目2</th>
+              <th>選択項目3</th>
+              <th>選択項目4</th>
               <th>答え</th>
+              <th>編集ボタン</th>
           </tr>
       </thead>
-      <tbody>
           {% for quiz in quizzes %}
           <tr>
               <td>{{ quiz[0] }}</td>
-              <td>{{ quiz[1] }}</td>
+              <td><img src="{{url_for('static', filename=name+quiz[1])}}"></td>
               <td>{{ quiz[2] }}</td>
+              <td>{{ quiz[3] }}</td>
+              <td>{{ quiz[4] }}</td>
+              <td>{{ quiz[5] }}</td>
+              <td>{{ quiz[6] }}</td>
+              <td>
+                <form action="{{url_for('edit')}}"method='POST'>
+                  <input type="hidden" name="id" value="{{ quiz[0] }}">
+                  <input type="submit"value='編集'>
+                </form></td>
           </tr>
           {% endfor %}
   </body>
