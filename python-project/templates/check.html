@@ -27,7 +27,13 @@
               <label for="{{session['answer'][i][4]}}"
                 >[選択項目4]{{session['answer'][i][4]}},</label
               >
-              <p>{{session['result'][i]}}</p>
+              {% if session['result'][i] == '〇正解' %}
+              <h1 style="color: red">{{session['result'][i]}}</h1>
+              {% endif %}
+              {% if session['result'][i] == '✕不正解' %}
+              <h1 style="color: blue">{{session['result'][i]}}</h1>
+              <p>あなたの答えは{{session['u_answer'][i]}}</p>
+              {% endif %}
               <p class="r_answer">答え</p>
               <p>{{session['answer'][i][5]}}</p>
       {% endfor %}

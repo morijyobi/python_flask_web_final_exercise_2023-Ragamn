@@ -94,26 +94,29 @@ def register_quiz_form():
   
 @app.route('/register_quiz' , methods=['POST'])
 def register_quiz():
-  answer1 = request.form.get('answer1')
-  answer2 = request.form.get('answer2')
-  answer3 = request.form.get('answer3')
-  answer4 = request.form.get('answer4')
-  answer = request.form.get('answer')
-   # アップロードされたファイルをrequestから取得
-  file = request.files['file']
-   # ../../a.jpgみたいな名前のファイルへの対策(ディレクトリトラバーサル攻撃)
-  # 不要な文字列を削除します。(なお、日本語も削除されちゃいます....)
-  # ファイルを保存
-  name = secure_filename(file.filename)
-  file.save(os.path.join(UPLOAD_FOLDER, name))
-  
-  count = db.insert_quiz(name,answer1,answer2,answer3,answer4,answer)
-  
-  if count == 1:
-    return redirect(url_for('admin_menu'))
-  else:
-    error = '登録に失敗しました'
-    return render_template('register_quiz_form.html', error=error)
+  if 'user' in session:
+    answer1 = request.form.get('answer1')
+    answer2 = request.form.get('answer2')
+    answer3 = request.form.get('answer3')
+    answer4 = request.form.get('answer4')
+    answer = request.form.get('answer')
+    # アップロードされたファイルをrequestから取得
+    file = request.files['file']
+    # ../../a.jpgみたいな名前のファイルへの対策(ディレクトリトラバーサル攻撃)
+    # 不要な文字列を削除します。(なお、日本語も削除されちゃいます....)
+    # ファイルを保存
+    name = secure_filename(file.filename)
+    file.save(os.path.join(UPLOAD_FOLDER, name))
+    
+    count = db.insert_quiz(name,answer1,answer2,answer3,answer4,answer)
+    
+    if count == 1:
+      return redirect(url_for('admin_menu'))
+    else:
+      error = '登録に失敗しました'
+      return render_template('register_quiz_form.html', error=error)
+  else :
+    return redirect(url_for('login_form'))
 
 # @app.route('/list')
 # def list():
@@ -123,33 +126,44 @@ def register_quiz():
 
 @app.route('/edit',methods=['POST'])
 def edit():
-  id = request.form.get('id')
-  quiz = db.select_quiz(id)
-  return render_template('quiz_edit.html',quiz=quiz) 
+  if 'user' in session:
+    id = request.form.get('id')
+    quiz = db.select_quiz(id)
+    return render_template('quiz_edit.html',quiz=quiz) 
+  else :
+    return redirect(url_for('login_form'))
   
 @app.route('/update_quiz',methods=['POST'])
 def update_quiz():
-  id = request.form.get('id')
-  answer1 = request.form.get('answer1')
-  answer2 = request.form.get('answer2')
-  answer3 = request.form.get('answer3')
-  answer4 = request.form.get('answer4')
-  answer = request.form.get('answer')
-   # アップロードされたファイルをrequestから取得
-  file = request.files['file']
-   # ../../a.jpgみたいな名前のファイルへの対策(ディレクトリトラバーサル攻撃)
-  # 不要な文字列を削除します。(なお、日本語も削除されちゃいます....)
-  # ファイルを保存
-  name = secure_filename(file.filename)
-  file.save(os.path.join(UPLOAD_FOLDER, name))
-  db.update_quiz(id,name,answer1,answer2,answer3,answer4,answer)
-  return render_template('quiz_list.html')
+  if 'user' in session:
+    id = request.form.get('id')
+    answer1 = request.form.get('answer1')
+    answer2 = request.form.get('answer2')
+    answer3 = request.form.get('answer3')
+    answer4 = request.form.get('answer4')
+    answer = request.form.get('answer')
+    # アップロードされたファイルをrequestから取得
+    file = request.files['file']
+    # ../../a.jpgみたいな名前のファイルへの対策(ディレクトリトラバーサル攻撃)
+    # 不要な文字列を削除します。(なお、日本語も削除されちゃいます....)
+    # ファイルを保存
+    name = secure_filename(file.filename)
+    file.save(os.path.join(UPLOAD_FOLDER, name))
+    db.update_quiz(id,name,answer1,answer2,answer3,answer4,answer)
+    quiz_list = db.quiz_list()     
+    return render_template('quiz_list.html',quizzes=quiz_list,name='images/')
+  else :
+      return redirect(url_for('login_form'))
 
 @app.route('/delete_quiz',methods=['POST'])
 def delete_quiz():
-  id = request.form.get('id')
-  db.delete_quiz(id)
-  return render_template('quiz_list.html')
+  if 'user' in session:
+    id = request.form.get('id')
+    db.delete_quiz(id)
+    quiz_list = db.quiz_list()
+    return render_template('quiz_list.html',quizzes=quiz_list,name='images/')
+  else :
+      return redirect(url_for('login_form'))
 
 @app.route('/quiz_answer',methods=['get'])
 def quiz_answer():
@@ -184,7 +198,7 @@ def answer_check():
       session['result'].append('〇正解')
       count +=1 
     else:
-      session['result'].append('✕不正解あなたの答えは'+session['u_answer'][i])
+      session['result'].append('✕不正解')
     criterion.append(i)
     i +=1
     

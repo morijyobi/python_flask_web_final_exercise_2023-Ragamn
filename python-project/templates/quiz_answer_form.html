@@ -18,6 +18,7 @@
       <img
       src="{{url_for('static', filename=name+session['answer'][i][0])}}"
       /><br>
+      <div class="select_ans">
             <input
                 type="radio"
                 name="u_answer{{loop.index0}}"
@@ -53,6 +54,7 @@
               >
               <br>
             </div>
+          </div>
       {% endfor %}
       <input class="maru" type="submit" value="答え合わせをする" />
     </form>
